@@ -1,0 +1,60 @@
+[user]
+    name = 
+    email = 
+[core]
+    preloadindex = true
+    fscache = true
+	ignorecase = false
+[alias]
+    co = checkout
+    up = "!f() { git fetch --prune; git pull; git submodule update --remote --recursive --init; }; f"
+    getsprintname = "!f() { echo 'sprint_09'; }; f"
+    st = status
+    lt = log --pretty=oneline -n 15 --format='%an %s, %ar'
+    tree = log --graph --abbrev-commit --pretty=oneline --decorate --date=relative --format=format:'%w(200,5,50)%C(bold blue)%h%C(reset) - %C(bold green)(%ar) %C(dim white)- %an - %C(reset)%C(white)%s%C(reset)' --all
+    undo = reset --hard
+    diffstat = diff --stat -r
+    diffstats = "!f() { sprintBranch=$(git getsprintname); git diff \"$sprintBranch\" --stat -r; }; f" 
+    diffs = "!f() { sprintBranch=$(git getsprintname); git diff \"$sprintBranch\"; }; f"
+    shows = "!f() { sprintBranch=$(git getsprintname); git show \"$sprintBranch\"; }; f"
+    changes = diff --name-status -r
+    cmt = "!f() { git add -A ; git commit -m \"$1\" ; }; f"
+    cos = "!f() { sprintBranch=$(git getsprintname); git checkout \"$sprintBranch\"; }; f" 
+    cob = "!f() { git checkout -b \"$1\"; }; f"
+    cosp = "!f() { git cos; git up; }; f"
+    mg = merge --no-ff --no-edit
+    psh = push -u origin HEAD
+    cb = symbolic-ref --short HEAD
+    delete = "!f() { git branch -d $(git branch); }; f"
+    remove = rm --cached
+    ulbcp = "!f() { git push origin +HEAD^:\"$1\" }; f"
+    grab = "!f() { sprintBranch=$(git getsprintname); git pull origin \"$sprintBranch\" --no-edit; git submodule update --remote --recursive --init; }; f"
+    quick = "!f() { git cosp; git branch \"$1\"; git co \"$1\"; git cmt \"$2\"; }; f"
+[help]
+    autocorrect = 0
+[color]
+    ui = true
+[color "status"]
+    changed = yellow
+[gc]
+    auto = 256
+[push]
+    default = simple
+[difftool "sourcetree"]
+    cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+    cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+    trustExitCode = true
+[mergetool "kdiff3"]
+   cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+   trustExitCode = true
+[merge]
+    tool = kdiff3
+[difftool "kdiff3"]
+   cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$LOCAL\" \"$REMOTE\"
+[gui]
+[gui]
+[gui]
+	recentrepo = D:/Werk/Tuks/2nd Year/COS 216/Assignment4 Workspace/Clue
+[winUpdater]
+	recentlySeenVersion = 2.17.1.windows.2

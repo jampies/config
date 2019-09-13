@@ -1,0 +1,32 @@
+export PATH=~/bin:$PATH
+export PATH=~/npm-root/bin:$PATH
+
+history_search() {
+  if [ "$1" != "" ]
+  then
+    history | grep $1
+  else
+    history
+  fi
+}
+alias h=history_search
+
+function ff()
+{
+  findIt f $1
+}
+
+function fd()
+{
+  findIt d $1
+}
+
+function findIt ()
+{
+  find . -type $1 -iname $2 -ls;
+}
+
+function rmOrig()
+{
+  find -f /src/**/*.orig -exec rm {} +
+}
